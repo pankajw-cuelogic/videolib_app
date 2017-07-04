@@ -82,7 +82,8 @@ end
 
 private
 
-def user_params
-		params.require(:user).permit(:email, :first_name)
-	end
+  def user_params
+    params.require(:user).permit(:first_name, :last_name, :user_name, :DOB, :address, :city, :country)
+  end
+
 end
