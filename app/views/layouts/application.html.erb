@@ -1,11 +1,12 @@
+<% provide(:title,'Foo') %>
 <!DOCTYPE html>
 <html>
 <head>
-	<title>VideoLibUi</title>
+	<title>VideoLibUi | <%=yield(:title) %></title>
 	<%= csrf_meta_tags %>
 
-	<%= stylesheet_link_tag    'application', media: 'all' %>
-	<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+	<%= stylesheet_link_tag     %>
+	<%= javascript_include_tag %>
 </head>
 
 <body>
@@ -13,13 +14,12 @@
 <% flash.each do |key, value| %>
   <%= content_tag :div, value, class: "flash #{key}" %>
 <% end %>
-	<% if user_signed_in? %>
-	<%= link_to "Sign out", destroy_user_session_path, method: :delete %>	
 	
-	<% else %>
-	<%= link_to "Sign up", new_user_registration_path %>
-	<%= link_to "Sign in", new_user_session_path %>
-	<% end %>
-	<%= yield %>
+	<%= render 'layouts/header'%>
+	<div class="container">
+		<%=yield%>
+		<%= render 'layouts/footer' %>
+	</div>
+
 </body>
 </html>
