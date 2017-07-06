@@ -10,6 +10,9 @@ gem 'bootstrap'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.2'
+
+gem 'pry'
+gem 'cancancan', '~>1.10'
 # Use sqlite3 as the database for Active Record
 #gem 'sqlite3'
 gem 'mysql2', '>=0.3.13','<0.5'

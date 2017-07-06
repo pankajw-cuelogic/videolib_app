@@ -1,4 +1,5 @@
 class UserController < ApplicationController
+load_and_authorize_resource :only => [:edit, :show, :delete]
 
 	def index
 		@users = User.all
@@ -43,8 +44,13 @@ end
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render json: @user, status: :created, location: @user }
+        # to show created user
+        #format.html { redirect_to @user, notice: 'User was successfully created.' }
+        #format.json { render json: @user, status: :created, location: @user }
+        
+        # to redirect ro list view
+        format.html { redirect_to list_path, notice: 'User was successfully created.' }
+        format.json { head :no_content }
       else
         format.html { render action: "new" }
         format.json { render json: @user.errors, status: :unprocessable_entity }
@@ -59,7 +65,7 @@ end
 
     respond_to do |format|
       if @user.update_attributes(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.html { redirect_to list_path, notice: 'User was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -83,7 +89,8 @@ end
 private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :user_name, :DOB, :address, :city, :country, :password, :password_confirmation, :email)
+    params.require(:user).permit(:first_name, :last_name, :user_name, :DOB,
+     :address, :city, :country, :password, :password_confirmation, :email, :user_type, :admin)
   end
 
 end

@@ -11,53 +11,6 @@
 </div>
 <% end %> 
 
-<% if false %>
-code commented till........
-<div class="field">
-  <%= f.label :first_name %><br />
-  <%= f.text_field :first_name %>
-</div>
-
-<div class="field">
-  <%= f.label :last_name %><br />
-  <%= f.text_field :last_name %>
-</div>
-
-
-<div class="field">
-  <%= f.label :user_name %><br />
-  <%= f.text_field :user_name %>
-</div>
-
-<div class="field">
-  <%= f.label :DOB %><br />
-  <%= f.text_field :DOB %>
-</div>
-
-<div class="field">
-  <%= f.label :address %><br />
-  <%= f.text_field :address %>
-</div>
-
-<div class="field">
-  <%= f.label :city %><br />
-  <%= f.text_field :city %>
-</div>
-
-<div class="field">
-  <%= f.label :country %><br />
-  <%= f.text_field :country %>
-</div>
-
-<div class="actions">
-  <%= f.submit %>
-</div>
-
-..........here commented
-
-<% end %>
-
-
 <body>
   <div class="container">
     <h2>Horizontal form</h2>
@@ -125,6 +78,15 @@ code commented till........
     <div class="col-sm-10">          
      <div class="form-control" >
        <%= f.text_field :country %>
+     </div>
+   </div>
+ </div>
+ 
+<div class="form-group">
+    <label class="control-label col-sm-2" for="country"> <%= f.label :admin %><br /></label>
+    <div class="col-sm-10">          
+     <div class="form-control" >
+       <%= f.check_box :admin %>
      </div>
    </div>
  </div> 
