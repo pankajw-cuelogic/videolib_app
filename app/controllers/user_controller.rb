@@ -39,7 +39,7 @@ end
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(params[:user])
+    @user = User.new(user_params)
 
     respond_to do |format|
       if @user.save
@@ -83,7 +83,7 @@ end
 private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :user_name, :DOB, :address, :city, :country)
+    params.require(:user).permit(:first_name, :last_name, :user_name, :DOB, :address, :city, :country, :password, :password_confirmation, :email)
   end
 
 end
