@@ -15,111 +15,94 @@
   <div class="container">
     <h2>new user form</h2>
     <form class="form-horizontal">
+
       <div class="form-group">
         <label class="control-label col-sm-2" for="first_name"> <%= f.label :first_name %></label>
-        <div class="col-sm-10">
-          <div class="form-control" >
-            <%= f.text_field :first_name %>
-          </div>
+        <div  >
+          <%= f.text_field :first_name %>          
         </div>
+      </div>
 
-         <div class="form-group">
+      <div class="form-group">
         <label class="control-label col-sm-2" for="last_name"> <%= f.label :last_name %></label>
-        <div class="col-sm-10">
-          <div class="form-control" >
-            <%= f.text_field :last_name %>
-          </div>
+        <div >
+          <%= f.text_field :last_name %>          
         </div>
+      </div>
 
-        <div class="form-group">
-          <label class="control-label col-sm-2" for="pwd"> <%= f.label :user_name %><br /></label>
-          <div class="col-sm-10">          
-           <div class="form-control" >
-             <%= f.text_field :user_name %>
-           </div>
-         </div>
-       </div> 
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="pwd"> <%= f.label :user_name %> </label>
+        <div>
+         <%= f.text_field :user_name %>
+       </div>
+      </div> 
 
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="email"> <%= f.label :email %> </label>
+        <div>
+          <%= f.text_field :email %>       
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="DOB"><%= f.label :DOB %> </label>
+        <div >
+          <%= f.text_field :DOB %> 
+        </div>
+      </div>
+  
         <div class="form-group">
-          <label class="control-label col-sm-2" for="email"> <%= f.label :email %><br /></label>
-          <div class="col-sm-10">          
-           <div class="form-control" >
-             <%= f.text_field :email %>
-           </div>
-         </div>
-       </div> 
+          <label class="control-label col-sm-2" for="address"><%= f.label :address %> </label>
+          <div > 
+             <%= f.text_field :address %>
+          </div>
+        </div> 
 
        <div class="form-group">
-        <label class="control-label col-sm-2" for="DOB"><%= f.label :DOB %><br /></label>
-        <div class="col-sm-10">          
-          <div class="form-control" >
-            <%= f.text_field :DOB %></div>
-          </div>
+        <label class="control-label col-sm-2" for="city"><%= f.label :city %> </label>
+        <div>
+          <%= f.text_field :city %>
         </div>
       </div> 
+
       <div class="form-group">
-        <label class="control-label col-sm-2" for="address"><%= f.label :address %><br /></label>
-        <div class="col-sm-10">          
-         <div class="form-control" >
-           <%= f.text_field :address %>
-         </div>
+        <label class="control-label col-sm-2" for="country"> <%= f.label :country %> </label>
+        <div >          
+         <%= f.text_field :country %>
        </div>
      </div> 
+    
      <div class="form-group">
-      <label class="control-label col-sm-2" for="city"><%= f.label :city %><br /></label>
-      <div class="col-sm-10">          
-       <div class="form-control" >
-        <%= f.text_field :city %>
-      </div>
-    </div>
-  </div> 
-  <div class="form-group">
-    <label class="control-label col-sm-2" for="country"> <%= f.label :country %><br /></label>
-    <div class="col-sm-10">          
-     <div class="form-control" >
-       <%= f.text_field :country %>
-     </div>
-   </div>
- </div> 
+      <label class="control-label col-sm-2" for="country"> <%= f.label :password %><% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> characters minimum)</em>
+        <% end %></label>
+        <div >          
+         <%= f.password_field :password, autocomplete: "off" %>
+       </div>
+     </div> 
 
-
-  <div class="form-group">
-    <label class="control-label col-sm-2" for="country"> <%= f.label :password %><% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %></label>
-    <div class="col-sm-10">          
-     <div class="form-control" >
-       <%= f.password_field :password, autocomplete: "off" %>
-     </div>
-   </div>
- </div> 
-   <div class="form-group">
-    <label class="control-label col-sm-2" for="country"> <%= f.label :password_confirmation %><br /><br /></label>
-    <div class="col-sm-10">          
-     <div class="form-control" >
+     <div class="form-group">
+      <label class="control-label col-sm-2" for="country"> <%= f.label :password_confirmation %>  </label>
+      <div >          
        <%= f.password_field :password_confirmation, autocomplete: "off" %>
      </div>
-   </div>
- </div> 
+    </div> 
 
-<div class="form-group">
-    <label class="control-label col-sm-2" for="country"> <%= f.label :admin %><br /></label>
-    <div class="col-sm-10">          
-     <div class="form-control" >
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="country"> <%= f.label :admin %> </label>
+      <div  >
        <%= f.check_box :admin %>
      </div>
-   </div>
- </div> 
+    </div> 
 
- <div class="form-group">        
-  <div class="col-sm-offset-2 col-sm-10">
-    <button type="submit" >
-      <%= f.submit %>
-    </button>
+    <div class="form-group">        
+      <div class="col-sm-offset-2 col-sm-10">
+        <%= f.submit %>
+      </div>
+    </div>
+
+  </form>
   </div>
-</div>
-</form>
-</div>
 </body>
 
 <% end %>
