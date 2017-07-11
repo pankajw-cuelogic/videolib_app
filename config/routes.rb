@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :categories
+  resources :video
   get 'static_pages/home'
 
   get 'static_pages/help'
@@ -23,6 +24,15 @@ match '/help', to: 'static_pages#help', via: :get
 match '/about', to: 'static_pages#about', via: :get
 
 match '/categories', to: 'categories#show', via: :get
+
+match '/newvideo', to: 'video#new', via: :get
+
+match '/newvideo', to: 'video#create', via: :post
+
+match '/videolist', to: 'video#index', via: :get
+
+match '/videodelete', to: 'video#delete', via: :get
+
 
 
 end

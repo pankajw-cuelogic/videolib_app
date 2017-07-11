@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170706111601) do
+ActiveRecord::Schema.define(version: 20170711130144) do
 
   create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "category_name"
@@ -44,6 +44,21 @@ ActiveRecord::Schema.define(version: 20170706111601) do
     t.boolean "admin"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "videos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "video_title"
+    t.string "video_url"
+    t.string "category"
+    t.string "composer"
+    t.string "is_available"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "item_video_file_name"
+    t.string "item_video_content_type"
+    t.integer "item_video_file_size"
+    t.datetime "item_video_updated_at"
+    t.integer "category_id"
   end
 
 end
