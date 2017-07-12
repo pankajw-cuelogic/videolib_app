@@ -5,6 +5,13 @@ class VideoController < ApplicationController
 	def index
 		@video = Video.all
 
+		if params[:search]      
+			@video = Video.search(params[:search]).order("created_at DESC")    
+		else
+			@video = Video.all.order("created_at DESC")    
+		end
+
+		@categories=Category.all
 	end
 
 	def show
@@ -59,7 +66,7 @@ end
   private
 
   def video_params
-  	params.required(:video).permit(:video_title, :category, :item_video, :composer, :is_available, :category_id) 	
+  	params.required(:video).permit(:video_title, :category, :item_video, :composer, :is_available, :category_id, :search) 	
   end
 
 end

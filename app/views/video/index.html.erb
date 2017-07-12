@@ -1,8 +1,18 @@
 <h1>Listing videos</h1>
 <table>
-<li><%= link_to "Upload new Video", newvideo_path %></li>
-						
-	<div class="container">            
+	<li><%= link_to "Upload new Video", newvideo_path %></li>
+
+	<div class="container">
+
+		<%= form_tag(video_index_path, :method => "get", id: "search-form") do %> 
+		<%= text_field_tag :search, params[:search], placeholder: "Search Videos" %>
+		<%= submit_tag "Search", :name => nil %>
+		<% end %> 
+		<% if @videos.blank? %>
+		There are no videos containing the term <%= params[:search] %>.
+		<% end %>
+
+
 		<table class="table table-hover table-bordered">
 			<thead>
 				<tr>

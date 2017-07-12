@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :subscribers
   resources :categories
   resources :video
   get 'static_pages/home'

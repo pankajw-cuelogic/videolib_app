@@ -1,0 +1,52 @@
+<%= form_with(model: subscriber, local: true) do |form| %>
+<% if subscriber.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(subscriber.errors.count, "error") %> prohibited this subscriber from being saved:</h2>
+
+  <ul>
+    <% subscriber.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+<div class="field">
+  <%= form.label :plan_name %>
+  <%= form.text_field :plan_name, id: :subscriber_plan_name %>
+</div>
+
+<div class="field">
+  <%= form.label :validity %>
+  <%= form.number_field :validity, id: :subscriber_validity %>
+</div>
+
+<div class="field">
+  <%= form.label :plan_code %>
+  <%= form.text_field :plan_code, id: :subscriber_plan_code %>
+</div>
+
+<div class="field">
+  <%= form.label :no_of_videos %>
+  <%= form.text_field :no_of_videos, id: :subscriber_no_of_videos %>
+</div>
+
+<div class="field">
+  <%= form.label :expiry_in_days %>
+  <%= form.number_field :expiry_in_days, id: :subscriber_expiry_in_days %>
+</div>
+
+<div class="field">
+  <%= form.label :is_active %>
+  <%= form.check_box :is_active %>
+</div>
+
+<div class="field">
+  <%= form.label :subscription_cost %>
+  <%= form.number_field :subscription_cost, id: :subscriber_subscription_cost %>
+</div>
+
+<div class="actions">
+  <%= form.submit %>
+</div>
+<% end %>
