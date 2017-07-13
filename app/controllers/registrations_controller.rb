@@ -1,6 +1,5 @@
 class RegistrationsController < Devise::RegistrationsController
 
-
 	def new
 		super
 	end
@@ -25,6 +24,5 @@ class RegistrationsController < Devise::RegistrationsController
 	def user_params
 		params.require(:user).permit(:email, :first_name, :last_name, :user_name, :DOB, :address, :city, :country, :password, :password_confirmation, :user_type)
 	end
-
 
 end

@@ -1,4 +1,4 @@
-<%= form_for @user, url: user_index_path(@user) do |f| %>
+<%= form_for @user, url: user_registration_path(@user) do |f| %>
 <% if @user.errors.any? %>
 <div id="error_explanation">
   <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
@@ -35,74 +35,81 @@
         <div>
          <%= f.text_field :user_name %>
        </div>
-      </div> 
-
-      <div class="form-group">
-        <label class="control-label col-sm-2" for="email"> <%= f.label :email %> </label>
-        <div>
-          <%= f.text_field :email %>       
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label class="control-label col-sm-2" for="DOB"><%= f.label :DOB %> </label>
-        <div >
-          <%= f.text_field :DOB %> 
-        </div>
-      </div>
-  
-        <div class="form-group">
-          <label class="control-label col-sm-2" for="address"><%= f.label :address %> </label>
-          <div > 
-             <%= f.text_field :address %>
-          </div>
-        </div> 
-
-       <div class="form-group">
-        <label class="control-label col-sm-2" for="city"><%= f.label :city %> </label>
-        <div>
-          <%= f.text_field :city %>
-        </div>
-      </div> 
-
-      <div class="form-group">
-        <label class="control-label col-sm-2" for="country"> <%= f.label :country %> </label>
-        <div >          
-         <%= f.text_field :country %>
-       </div>
-     </div> 
-    
-     <div class="form-group">
-      <label class="control-label col-sm-2" for="country"> <%= f.label :password %><% if @minimum_password_length %>
-        <em>(<%= @minimum_password_length %> characters minimum)</em>
-        <% end %></label>
-        <div >          
-         <%= f.password_field :password, autocomplete: "off" %>
-       </div>
      </div> 
 
      <div class="form-group">
-      <label class="control-label col-sm-2" for="country"> <%= f.label :password_confirmation %>  </label>
-      <div >          
-       <%= f.password_field :password_confirmation, autocomplete: "off" %>
-     </div>
-    </div> 
-
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="country"> <%= f.label :admin %> </label>
-      <div  >
-       <%= f.check_box :admin %>
-     </div>
-    </div> 
-
-    <div class="form-group">        
-      <div class="col-sm-offset-2 col-sm-10">
-        <%= f.submit %>
+      <label class="control-label col-sm-2" for="email"> <%= f.label :email %> </label>
+      <div>
+        <%= f.text_field :email %>       
       </div>
     </div>
 
-  </form>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="DOB"><%= f.label :DOB %> </label>
+      <div >
+        <%= f.text_field :DOB %> 
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="address"><%= f.label :address %> </label>
+      <div > 
+       <%= f.text_field :address %>
+     </div>
+   </div> 
+
+   <div class="form-group">
+    <label class="control-label col-sm-2" for="city"><%= f.label :city %> </label>
+    <div>
+      <%= f.text_field :city %>
+    </div>
+  </div> 
+
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="country"> <%= f.label :country %> </label>
+    <div >          
+     <%= f.text_field :country %>
+   </div>
+ </div>
+
+ <div class="form-group">
+  <label class="control-label col-sm-2" for="subscription_id"> <%= f.label :subscription_id %></label>
+  <div >
+    <%= f.collection_select(:subscription_id, Subscriber.all, :id, :plan_name)  %>
   </div>
+</div>
+
+<div class="form-group">
+  <label class="control-label col-sm-2" for="country"> <%= f.label :password %><% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %></label>
+    <div >          
+     <%= f.password_field :password, autocomplete: "off" %>
+   </div>
+ </div> 
+
+ <div class="form-group">
+  <label class="control-label col-sm-2" for="country"> <%= f.label :password_confirmation %>  </label>
+  <div >          
+   <%= f.password_field :password_confirmation, autocomplete: "off" %>
+ </div>
+</div> 
+
+<div class="form-group">
+  <label class="control-label col-sm-2" for="country"> <%= f.label :admin %> </label>
+  <div  >
+   <%= f.check_box :admin %>
+ </div>
+</div> 
+
+<div class="form-group">        
+  <div class="col-sm-offset-2 col-sm-10">
+    <%= f.submit %>
+  </div>
+</div>
+
+</form>
+</div>
 </body>
 
 <% end %>

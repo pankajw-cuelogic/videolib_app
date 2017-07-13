@@ -1,14 +1,17 @@
 class UserController < ApplicationController
-load_and_authorize_resource :only => [:edit, :show, :delete]
+  load_and_authorize_resource :only => [:edit, :update, :show, :delete]
+  before_action :signed_in_user
+  before_action :correct_user, only:[:edit, :update, :delete]
 
-	def index
-		@users = User.all
+  def index
+    #@users = User.all
+    @users = User.paginate(page: params[:page], :per_page => 1)
 
-		respond_to do |format|
+    respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @users }
+    end
   end
-end
 # GET /users/1
   # GET /users/1.json
   def show
@@ -31,11 +34,16 @@ end
     end
   end
 
-
   # GET /users/1/edit
   def edit
     @user = User.find(params[:id])
   end
+
+  def subscribe
+    puts params[:id]
+    @user = User.find(params[:id])
+  end
+
 
   # POST /users
   # POST /users.json
@@ -86,11 +94,23 @@ end
     end
   end
 
-private
+  private
 
   def user_params
     params.require(:user).permit(:first_name, :last_name, :user_name, :DOB,
-     :address, :city, :country, :password, :password_confirmation, :email, :user_type, :admin)
+     :address, :city, :country, :password, :password_confirmation, :email, :user_type, :admin, :subscription_id)
   end
 
+  def correct_user
+    @user =  User.find(params[:id])
+    redirect_to(root_path) unless current_user?(@user)    
+  end
+
+  def current_user?(user)
+    user = current_user
+  end
+
+  def signed_in_user
+    redirect_to new_user_session_path, notice: "Please sign in." unless signed_in?
+  end
 end

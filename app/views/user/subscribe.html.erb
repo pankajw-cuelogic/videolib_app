@@ -1,0 +1,45 @@
+<%= form_for @user, url: user_path(@user) do |f| %>
+<% if @user.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+  <ul>
+    <% @user.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %> 
+
+<body>
+  <div class="container">
+    <form>
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="first_name"> <%= f.label :first_name %></label>        
+        <%= f.text_field :first_name %>
+      </div>    
+
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="last_name"> <%= f.label :last_name %></label>
+        <%= f.text_field :last_name %>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="subscription_id"> <%= f.label :subscription_id %></label>
+        <div >
+          <%= f.collection_select(:subscription_id, Subscriber.all, :id, :plan_name)  %>
+        </div>
+      </div>
+
+      <div class="form-group">        
+        <div class="col-sm-offset-2 col-sm-10">        
+          <button>
+            <%= link_to 'Cancel', list_path %>
+          </button>
+          <%= f.submit %>
+        </div>
+      </div>
+    </form>
+  </div>
+</body>
+<% end %>

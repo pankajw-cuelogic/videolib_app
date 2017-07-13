@@ -4,7 +4,7 @@ class SubscribersController < ApplicationController
   # GET /subscribers
   # GET /subscribers.json
   def index
-    @subscribers = Subscriber.all
+    @subscribers = Subscriber.paginate(page: params[:page], :per_page => 10)
   end
 
   # GET /subscribers/1
@@ -28,7 +28,7 @@ class SubscribersController < ApplicationController
 
     respond_to do |format|
       if @subscriber.save
-        format.html { redirect_to @subscriber, notice: 'Subscriber was successfully created.' }
+        format.html { redirect_to subscribers_path, notice: 'Subscriber was successfully created.' }
         format.json { render :show, status: :created, location: @subscriber }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class SubscribersController < ApplicationController
   def update
     respond_to do |format|
       if @subscriber.update(subscriber_params)
-        format.html { redirect_to @subscriber, notice: 'Subscriber was successfully updated.' }
+        format.html { redirect_to subscribers_path, notice: 'Subscriber was successfully updated.' }
         format.json { render :show, status: :ok, location: @subscriber }
       else
         format.html { render :edit }

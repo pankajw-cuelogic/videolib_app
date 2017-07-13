@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   resources :subscribers
   resources :categories
   resources :video
+  resources :user
+
   get 'static_pages/home'
 
   get 'static_pages/help'
@@ -18,7 +20,7 @@ Rails.application.routes.draw do
 root to: 'static_pages#home'
 match '/list', to: 'user#index', via: :get
 match '/new', to: 'user#new', via: :get
-
+match '/subscribe', to: 'user#subscribe', via: :get
 
 match '/help', to: 'static_pages#help', via: :get
 

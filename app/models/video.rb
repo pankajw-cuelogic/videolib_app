@@ -24,9 +24,5 @@ end
 # Validate the attached image is video/mp4, video/flv, etc
 validates_attachment_content_type :item_video , :content_type => /\Avideo\/.*\Z/
 
-
-
-
-
 belongs_to :category
 end

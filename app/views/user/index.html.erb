@@ -12,21 +12,23 @@
           <th>City</th>
           <th>Country</th>
           <th>Email</th>
-          <th>Edit User</th>
-          <th>Delete User</th>          
+          <th colspan="4">Actions</th>
+          
         </tr>
       </thead>
+      <%= will_paginate @users  %>
       <tbody>
        <% @users.each do |user| %>
-       <tr>
+       <tr>        
         <td><%= user.first_name %></td>
         <td><%= user.last_name %></td>        
         <td><%= user.DOB %></td>
         <td><%= user.city%></td>
         <td><%= user.country%></td>
-
         <td><%= user.email %></td>
+        <td><%= user.subscriber.try(:plan_name) %></td>
         <td><%= link_to 'Edit', edit_user_path(user.id) %></td>
+        <td><%= link_to 'Subscribe', subscribe_path(:id =>user.id) %></td>        
         <td><%= link_to 'Delete', user, method: :delete, data:{ confirm: 'Are you sure, you want to delete user?'} %></td>
       </tr>
       <% end %>
