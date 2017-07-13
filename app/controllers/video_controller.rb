@@ -4,18 +4,25 @@ class VideoController < ApplicationController
   before_action :admin_user, only: :destroy
 
   def index
+    @user = current_user
+    
+    @video = @user.videos.paginate(page: params[:page], :per_page => 5)
+
+    if ( params[:search] && current_user.admin)
+      @video = Video.paginate(page: params[:page], :per_page => 5).search(params[:search]).order("created_at DESC")
+    elsif (params[:search] && !current_user.admin)
+     @video = @user.videos.paginate(page: params[:page], :per_page => 5).search(params[:search]).order("created_at DESC")
+   elsif(!current_user.admin)
+    @video = @user.videos.paginate(page: params[:page], :per_page => 5).order("created_at DESC")    
+  else
     @video = Video.paginate(page: params[:page], :per_page => 5)
 
-    if params[:search]      
-     @video = Video.paginate(page: params[:page], :per_page => 5).search(params[:search]).order("created_at DESC")    
-   else
-     @video = Video.paginate(page: params[:page], :per_page => 5).order("created_at DESC")    
-   end
+  end
 
-   @categories=Category.all
- end
+  @categories = Category.all
+end
 
- def show
+def show
   @video = Video.find(params[:id])
 
   respond_to do |format|
@@ -35,7 +42,7 @@ class VideoController < ApplicationController
  end
 
  def create		
-   @video = Video.new(video_params)
+   @video = current_user.videos.new(video_params)
    if @video.save
     puts "in save success"
 

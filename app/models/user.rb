@@ -23,5 +23,6 @@ validates(:email,
   validates :country,presence: true, length:{minimum: 2, maximum: 50}
 
   belongs_to :subscriber, foreign_key: :subscription_id
+  has_many :videos, dependent: :destroy
   
 end

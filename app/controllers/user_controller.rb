@@ -12,6 +12,7 @@ class UserController < ApplicationController
       format.json { render json: @users }
     end
   end
+  
 # GET /users/1
   # GET /users/1.json
   def show
@@ -98,7 +99,7 @@ class UserController < ApplicationController
 
   def user_params
     params.require(:user).permit(:first_name, :last_name, :user_name, :DOB,
-     :address, :city, :country, :password, :password_confirmation, :email, :user_type, :admin, :subscription_id)
+     :address, :city, :country, :password, :password_confirmation, :email, :user_type, :admin, :subscription_id, :user_id)
   end
 
   def correct_user

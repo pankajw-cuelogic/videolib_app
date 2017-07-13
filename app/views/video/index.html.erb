@@ -1,6 +1,8 @@
 <table>
 	<li><%= link_to "Upload new Video", newvideo_path %></li>
 
+<h3>Videos : <%= @video.count %> </h3>
+
 	<div class="container">
 		<%= form_tag(video_index_path, :method => "get", id: "search-form") do %> 
 		<%= text_field_tag :search, params[:search], placeholder: "Search Videos" %>
@@ -17,7 +19,9 @@
 					<th>Category</th>
 					<th>Composer</th>
 					<th>Is Availbale</th>					
-					<th>Video</th>					
+					<th>Video</th>
+					<th>Uploaded at</th>										
+					<th>Uploaded by</th>										
 					<th>Show</th>				
 					<th>Delete Video</th>  
 				</tr>
@@ -36,7 +40,9 @@
 							<source src= "https://s3.ap-south-1.amazonaws.com/<%= video.item_video.url.remove("s3.amazonaws.com").remove("///") %>" />
 								Your browser does not support the video tag.
 							</video>
-						</td>						
+						</td>
+						<td class="timestamp" ><%= time_ago_in_words(video.created_at) %> </td>
+						<td class="timestamp" ><%= video.user.first_name  %> <%= video.user.last_name  %> </td>
 						<td><%= link_to 'Show', video %></td>
 						<td><%= link_to 'Delete', video, method: :delete, data:{ confirm: 'Are you sure?'} %></td>
 					</tr>
