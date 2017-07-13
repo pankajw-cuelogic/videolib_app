@@ -1,7 +1,7 @@
 class VideoController < ApplicationController
-	before_action :set_post, only:[:show, :edit, :update]
 	before_action :correct_user, except: [:index, :show]
   before_action :admin_user, only: :destroy
+  before_action :signed_in_user
 
   def index
     @user = current_user

@@ -1,5 +1,6 @@
 class SubscribersController < ApplicationController
   before_action :set_subscriber, only: [:show, :edit, :update, :destroy]
+  before_action :signed_in_user
 
   # GET /subscribers
   # GET /subscribers.json
@@ -71,4 +72,8 @@ class SubscribersController < ApplicationController
     def subscriber_params
       params.require(:subscriber).permit(:plan_name, :validity, :plan_code, :no_of_videos, :expiry_in_days, :is_active, :subscription_cost)
     end
-end
+    def signed_in_user
+      redirect_to new_user_session_path, notice: "Please sign in." unless signed_in?
+    end
+
+  end

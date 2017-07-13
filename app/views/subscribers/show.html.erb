@@ -9,6 +9,7 @@
   <strong>Validity:</strong>
   <%= @subscriber.validity %>
 </p>
-
+<% if current_user.admin? %>
 <%= link_to 'Edit', edit_subscriber_path(@subscriber) %> |
+<% end %>
 <%= link_to 'Back', subscribers_path %>
