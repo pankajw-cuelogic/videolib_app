@@ -1,4 +1,3 @@
-<h1>Listing videos</h1>
 <table>
 	<li><%= link_to "Upload new Video", newvideo_path %></li>
 
@@ -7,7 +6,7 @@
 		<%= text_field_tag :search, params[:search], placeholder: "Search Videos" %>
 		<%= submit_tag "Search", :name => nil %>
 		<% end %> 
-		<% if @videos.blank? %>
+		<% if @video.blank? %>
 		There are no videos containing the term <%= params[:search] %>.
 		<% end %>
 

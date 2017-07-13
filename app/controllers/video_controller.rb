@@ -1,23 +1,24 @@
 class VideoController < ApplicationController
 	before_action :set_post, only:[:show, :edit, :update]
 	before_action :correct_user, except: [:index, :show]
+  before_action :admin_user, only: :destroy
 
-	def index
-		@video = Video.paginate(page: params[:page], :per_page => 5)
+  def index
+    @video = Video.paginate(page: params[:page], :per_page => 5)
 
-		if params[:search]      
-			@video = Video.paginate(page: params[:page], :per_page => 5).search(params[:search]).order("created_at DESC")    
-		else
-			@video = Video.paginate(page: params[:page], :per_page => 5).order("created_at DESC")    
-		end
+    if params[:search]      
+     @video = Video.paginate(page: params[:page], :per_page => 5).search(params[:search]).order("created_at DESC")    
+   else
+     @video = Video.paginate(page: params[:page], :per_page => 5).order("created_at DESC")    
+   end
 
-		@categories=Category.all
-	end
+   @categories=Category.all
+ end
 
-	def show
-		@video = Video.find(params[:id])
+ def show
+  @video = Video.find(params[:id])
 
-		respond_to do |format|
+  respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @video }
     end
@@ -37,7 +38,7 @@ class VideoController < ApplicationController
    @video = Video.new(video_params)
    if @video.save
     puts "in save success"
-    
+
     redirect_to newvideo_path , notice: 'Video Successfully uploaded.'
   else
     flash.now[:error] = @video.errors.full_messages
@@ -74,6 +75,10 @@ end
 
   def signed_in_user
   	redirect_to new_user_session_path, notice: "Please sign in." unless signed_in?
+  end
+
+  def admin_user
+    redirect_to  videolist_path, notice: "You are not autherised user to delete this video" unless current_user.admin?
   end
 
 end
