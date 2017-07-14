@@ -1,7 +1,7 @@
 <table>
 	<li><%= link_to "Upload new Video", newvideo_path %></li>
 
-<h3>Videos : <%= @video.count %> </h3>
+	<h3>Videos count : <%= @video.count %> </h3>
 
 	<div class="container">
 		<%= form_tag(video_index_path, :method => "get", id: "search-form") do %> 
@@ -21,9 +21,13 @@
 					<th>Is Availbale</th>					
 					<th>Video</th>
 					<th>Uploaded at</th>										
-					<th>Uploaded by</th>										
+					<th>Uploaded by</th>
+					<th>Status</th>										
 					<th>Show</th>				
-					<th>Delete Video</th>  
+					<th>Delete Video</th>
+					<% if current_user.admin? %>
+					<th>Actions</th>
+					<% end %>
 				</tr>
 			</thead>
 			<%= will_paginate @video %>
@@ -33,7 +37,7 @@
 					<td><%= video.video_title %></td>
 					<td><%= video.category.try(:category_name) %></td>        
 					<td><%= video.composer %></td>
-					<td><%= video.is_available %></td>
+					<td><%= video.is_available? ? "Availbale" : "Not Availbale" %></td>
 
 					<td>
 						<video width="320" height="240" controls="controls">
@@ -42,9 +46,18 @@
 							</video>
 						</td>
 						<td class="timestamp" ><%= time_ago_in_words(video.created_at) %> </td>
-						<td class="timestamp" ><%= video.user.first_name  %> <%= video.user.last_name  %> </td>
+						<td class="timestamp" ><%= video.user.try(:first_name)  %> <%= video.user.try(:last_name)  %> </td>
+						<td><%= video.is_approved? ? "Approved": "Rejected" %> </td>
 						<td><%= link_to 'Show', video %></td>
 						<td><%= link_to 'Delete', video, method: :delete, data:{ confirm: 'Are you sure?'} %></td>
+						<% if current_user.admin? %>
+						<th>
+							<%= link_to 'Approve', video, method: :delete, data:{ confirm: 'Are you sure?'} %> / 
+							<%= link_to 'Reject', video, method: :delete, data:{ confirm: 'Are you sure?'} %>
+
+						</th>
+						<% end %>
+
 					</tr>
 					<% end %>
 				</tbody>
