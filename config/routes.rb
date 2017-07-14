@@ -36,6 +36,8 @@ match '/videolist', to: 'video#index', via: :get
 
 match '/videodelete', to: 'video#delete', via: :get
 
+match '/videoapprove', to: 'video#approve', via: :get
 
+match '/videoreject', to: 'video#reject', via: :get
 
 end

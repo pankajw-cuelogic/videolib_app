@@ -22,4 +22,38 @@ belongs_to :user
 
 validates :user_id, presence: true
 
+
+# Approve video which is uploaded by subscriber
+def approved
+
+  @video = User.find(params[:id])
+
+  respond_to do |format|
+    if @video.update_attributes(is_approved: 1)
+      format.html { redirect_to videolist_path, notice: 'Video successfully approved.' }
+      format.json { head :no_content }
+    else
+      format.html { render action: "approved" }
+      format.json { render json: @user.errors, status: :unprocessable_entity }
+    end
+  end
+end
+
+# Reject video uploaded by subscriber
+def reject
+  @video = User.find(params[:id])
+
+  video_params.
+  respond_to do |format|
+    if @video.update_attributes(is_approved: 1)
+      format.html { redirect_to videolist_path, notice: 'Video successfully rejected.' }
+      format.json { head :no_content }
+    else
+      format.html { render action: "approved" }
+      format.json { render json: @user.errors, status: :unprocessable_entity }
+    end
+  end
+end
+
+
 end

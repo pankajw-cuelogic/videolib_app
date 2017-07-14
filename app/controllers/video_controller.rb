@@ -5,15 +5,16 @@ class VideoController < ApplicationController
 
   def index
     @user = current_user
-    
+
     @video = @user.videos.paginate(page: params[:page], :per_page => 5)
 
     if ( params[:search] && current_user.admin)
       @video = Video.paginate(page: params[:page], :per_page => 5).search(params[:search]).order("created_at DESC")
     elsif (params[:search] && !current_user.admin)
-     @video = @user.videos.paginate(page: params[:page], :per_page => 5).search(params[:search]).order("created_at DESC")
+     @video = @user.videos.where(is_approved: 1).paginate(page: params[:page], :per_page => 5).search(params[:search]).order("created_at DESC")
+
    elsif(!current_user.admin)
-    @video = @user.videos.paginate(page: params[:page], :per_page => 5).order("created_at DESC")    
+    @video = @user.videos.where(is_approved: 1).paginate(page: params[:page], :per_page => 5).order("created_at DESC")    
   else
     @video = Video.paginate(page: params[:page], :per_page => 5)
 
@@ -35,6 +36,7 @@ def show
   end
 
   def update
+
   end
 
   def new		
@@ -65,27 +67,45 @@ end
   	end
   end
 
-  private
 
-  def video_params
-  	params.required(:video).permit(:video_title, :category, :item_video, :composer, :is_available, :category_id, :search) 	
-  end
+# Approve video which is uploaded by subscriber
+def approve
 
-  def correct_user
-  	@user =  User.find(current_user.id)
-  	redirect_to(root_path) unless current_user?(@user)    
-  end
+  #@video = Video.find(params[:id])
 
-  def current_user?(user)
-  	user = current_user
-  end
+  Video.find(params[:id]).update(is_approved: 1)
+  redirect_to videolist_path, notice: 'Video successfully approved.'
 
-  def signed_in_user
-  	redirect_to new_user_session_path, notice: "Please sign in." unless signed_in?
-  end
+end
 
-  def admin_user
-    redirect_to  videolist_path, notice: "You are not autherised user to delete this video" unless current_user.admin?
-  end
+# Reject video uploaded by subscriber
+def reject
+  Video.find(params[:id]).update(is_approved: 0)
+  redirect_to videolist_path, notice: 'Video successfully rejected.'
+  
+end
+
+private
+
+def video_params
+ params.required(:video).permit(:video_title, :category, :item_video, :composer, :is_available, :category_id, :search) 	
+end
+
+def correct_user
+ @user =  User.find(current_user.id)
+ redirect_to(root_path) unless current_user?(@user)    
+end
+
+def current_user?(user)
+ user = current_user
+end
+
+def signed_in_user
+ redirect_to new_user_session_path, notice: "Please sign in." unless signed_in?
+end
+
+def admin_user
+  redirect_to  videolist_path, notice: "You are not autherised user to delete this video" unless current_user.admin?
+end
 
 end

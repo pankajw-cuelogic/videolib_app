@@ -52,8 +52,8 @@
 						<td><%= link_to 'Delete', video, method: :delete, data:{ confirm: 'Are you sure?'} %></td>
 						<% if current_user.admin? %>
 						<th>
-							<%= link_to 'Approve', video, method: :delete, data:{ confirm: 'Are you sure?'} %> / 
-							<%= link_to 'Reject', video, method: :delete, data:{ confirm: 'Are you sure?'} %>
+							<%= link_to 'Approve',  videoapprove_path(:id =>video.id) %> / 
+							<%= link_to 'Reject',   videoreject_path(:id =>video.id), data:{ confirm: 'Are you sure?'} %>
 
 						</th>
 						<% end %>
